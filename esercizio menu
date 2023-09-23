@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace menu
+{
+    class Program
+    {
+        struct dati {
+            public string nome;
+           public string cognome;
+            public string DataNascita;
+            public string LuogoNascita;
+            public char sesso;
+            
+
+        }
+        static void Main(string[] args)
+        {
+            //gestione anagrafe di un comune
+            const string Titolo = "gestione anagrafe";
+            bool errato = false;
+            string[] opzioni = { "inserimento", "ricerca", "visualizza", "modifica", "elimina", "exit" };
+            int scelta,a=0;
+            do
+            {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                if (a == 0)
+                {
+                    scelta = 1;
+                }
+                else
+                {
+                    Console.WriteLine("inserire la propria scelta");
+
+                    menù(opzioni, Titolo);
+                   
+                    scelta=Convert.ToInt32(Console.ReadLine());
+                }
+             
+                
+                a++;
+                if (scelta>=0 && scelta <= opzioni.Length)
+                {
+                    switch (scelta)
+                    {
+                        case 1:
+                            Inserimento(out dati[] persone);
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("scelta non valida");
+                    errato = true;
+                }
+              
+            }
+            while (scelta != 0 || errato==true);
+        }
+        static void menù(string [] opzioni, string titolo)
+        {
+            Console.WriteLine(titolo);
+            for (int i = 0; i < opzioni.Length; i++)
+            {
+                Console.Write($"-{i} ");
+                Console.WriteLine(opzioni[i]);     //stampa menù
+
+            }
+        }
+        static void Inserimento(out dati [] persone)
+        {
+            
+            int lung;
+            Console.WriteLine("quante persone vuoi inserire");
+           lung= Convert.ToInt32( Console.ReadLine());
+             persone= new dati[lung];
+            for (int i=0; i<lung; i++)
+            {
+                Console.WriteLine("inserisci il nome");
+                persone[i].nome = Console.ReadLine();
+                Console.WriteLine("inserisci il cognome");      //inserimento
+                persone[i].cognome = Console.ReadLine();
+                Console.WriteLine("scrivi la data di nascita nel foramto gg/mm/aaaa"); 
+                persone[i].DataNascita = Console.ReadLine();
+                Console.WriteLine("inserisci il luogo della nascita");
+                persone[i].LuogoNascita = Console.ReadLine();
+                Console.WriteLine("inserisci il cognome");
+                persone[i].sesso = Convert.ToChar(Console.ReadLine());
+              
+            }
+
+        }
+    }
+}
